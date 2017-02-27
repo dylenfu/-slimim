@@ -8,8 +8,11 @@ import (
 func main() {
 	Println(":::hello slim-im:::")
 
-	// struct demo
-	paragram.DemoStruct1()
-	paragram.DemoStruct2()
-	paragram.DemoStruct3()
+	testCase := 2
+	switch testCase {
+	case 1:
+		paragram.StructDemo()
+	case 2:
+		paragram.InterfaceDemo()
+	}
 }
