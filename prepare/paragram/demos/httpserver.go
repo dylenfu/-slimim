@@ -1,4 +1,4 @@
-package paragram
+package demos
 
 import (
 	"net/http"
@@ -18,5 +18,5 @@ func HttpServerDemo()  {
 }
 
 func handleTest(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln("test only")
+	fmt.Println("test only")
 }

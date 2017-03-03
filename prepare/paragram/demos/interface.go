@@ -1,4 +1,4 @@
-package paragram
+package demos
 
 import (
 	"fmt"

@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package serializ;
+package protodata;
 
 message Test
 {
