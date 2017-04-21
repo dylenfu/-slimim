@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	testCase := 4
+	testCase := 1
 	switch testCase {
 	case 1:
 		StructDemo()
