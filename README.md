@@ -1,5 +1,5 @@
 #slimim
-personal im project
+SLIM IM PROJECT
 
 ####1.子项目
 * gateway 网关,定位在线用户地址
