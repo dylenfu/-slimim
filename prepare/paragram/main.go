@@ -1,14 +1,11 @@
 package main
 
 import (
-	. "fmt"
 	. "slimim/prepare/paragram/demos"
 )
 
 func main() {
-	Println(":::hello slim-im:::")
-
-	testCase := 3
+	testCase := 4
 	switch testCase {
 	case 1:
 		StructDemo()
@@ -16,5 +13,7 @@ func main() {
 		InterfaceDemo()
 	case 3:
 		HttpServerDemo()
+	case 4:
+		BaseDemo()
 	}
 }
