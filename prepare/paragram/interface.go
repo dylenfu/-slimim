@@ -1,8 +1,4 @@
-package demos
-
-import (
-	"fmt"
-)
+package main
 
 func InterfaceDemo() {
 	struct1 := &DemoInterfaceStruct1{1, "111"}
@@ -14,19 +10,19 @@ func InterfaceDemo() {
 }
 
 func (s *DemoInterfaceStruct1) DemoInterfacePrintInt() {
-	fmt.Println("print int", s.data1)
+	println("print int", s.data1)
 }
 
 func (s *DemoInterfaceStruct1) DemoInterfacePrintString() {
-	fmt.Println("print string", s.data2)
+	println("print string", s.data2)
 }
 
 func (s *DemoInterfaceStruct2) DemoInterfacePrintString() {
-	fmt.Println("print string", s.data1)
+	println("print string", s.data1)
 }
 
 func (s *DemoInterfaceStruct2) DemoInterfacePrintFloat() {
-	fmt.Println("print float", s.data2)
+	println("print float", s.data2)
 }
 
 type DemoInterfaceStruct1 struct {

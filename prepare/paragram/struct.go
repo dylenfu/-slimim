@@ -1,4 +1,4 @@
-package demos
+package main
 
 func StructDemo() {
 	DemoStructFunc1()
