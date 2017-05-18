@@ -1,20 +1,19 @@
 package main
 
 import (
-	. "fmt"
-	. "slimim/prepare/paragram/demos"
+	"fmt"
+	"slimim/prepare/paragram/demos"
 )
 
 func main() {
-	Println(":::hello slim-im:::")
-
+	fmt.Println(":::hello slim-im:::")
 	testCase := 3
 	switch testCase {
 	case 1:
-		StructDemo()
+		demos.StructDemo()
 	case 2:
-		InterfaceDemo()
+		demos.InterfaceDemo()
 	case 3:
-		HttpServerDemo()
+		demos.HttpServerDemo()
 	}
 }
