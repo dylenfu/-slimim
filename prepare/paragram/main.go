@@ -7,9 +7,9 @@ func main() {
 	testCase := 3
 	switch testCase {
 	case 1:
-		StructDemo()
+		demos.StructDemo()
 	case 2:
-		InterfaceDemo()
+		demos.InterfaceDemo()
 	case 3:
 		HttpServerDemo()
 	case 4:
