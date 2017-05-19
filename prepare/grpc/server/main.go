@@ -13,8 +13,8 @@ import (
 
 const (
 	port = ":9090"
-	cert = "../resources/cert.pem"
-	key  = "../resources/key.pem"
+	cert = "um.dev.tokenbank-cert.pem"
+	key  = "um.dev.tokenbank-key.pem"
 )
 
 type server struct{}
