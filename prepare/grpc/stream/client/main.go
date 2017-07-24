@@ -4,7 +4,8 @@ import (
 	"flag"
 	"io"
 	"log"
-	"strconv"
+	//"strconv"
+	"time"
 
 	pb "slimim/prepare/grpc/stream/rpc"
 
@@ -41,7 +42,7 @@ func main() {
 func hello1(c pb.ApiServiceClient) {
 	stream, err := c.SayHello1(context.Background(), &pb.HelloReq{Data: "first"})
 	if err != nil {
-		log.Fatalf("failed to greet %v", err)
+		log.Fatalf("failed to call:%v", err)
 	}
 
 	for {
@@ -50,17 +51,17 @@ func hello1(c pb.ApiServiceClient) {
 			break
 		}
 		if err != nil {
-			log.Fatalf("failed to recv %v", err)
+			log.Fatalf("failed to recv:%v", err)
 		}
 
-		log.Printf("Greeting is %s", reply.Data)
+		log.Printf("client1 get:%s", reply.Data)
 	}
 }
 
 func hello2(c pb.ApiServiceClient) {
 	stream, err := c.SayHello2(context.Background())
 	if err != nil {
-		log.Fatalf("failed to greet %v", err)
+		log.Fatalf("failed to call:%v", err)
 	}
 
 	for i := 0; i < 100; i++ {
@@ -69,10 +70,10 @@ func hello2(c pb.ApiServiceClient) {
 
 	reply, err := stream.CloseAndRecv()
 	if err != nil {
-		log.Fatalf("failed to recv %v", err)
+		log.Fatalf("failed to recv:%v", err)
 	}
 
-	log.Printf("greeting: %s", reply.Data)
+	log.Printf("client2 get: %s", reply.Data)
 }
 
 func hello3(c pb.ApiServiceClient) {
@@ -82,16 +83,24 @@ func hello3(c pb.ApiServiceClient) {
 		return
 	}
 
-	var i int
+	req := pb.HelloReq{Data: "third 0"}
+	var i int = 0
+
 	for {
-		stream.Send(&pb.HelloReq{Data: "third " + strconv.Itoa(i)})
+		err := stream.Send(&req)
+		if err != nil {
+			log.Fatalf("failed to send %v", err)
+			return
+		}
+		time.Sleep(1 * time.Second)
+
 		reply, err := stream.Recv()
 		if err != nil {
-			log.Fatalf("failed to recv %v", err)
+			log.Fatalf("failed to recv:%v", err)
 			break
 		}
-
-		log.Fatalf("Greeting %s", reply.Data)
+		log.Fatalf("client3 get:%s", reply.Data)
 		i++
+		//req.Data = "third " + strconv.Itoa(i)
 	}
 }

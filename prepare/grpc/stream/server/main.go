@@ -5,6 +5,8 @@ import (
 	"io"
 	"log"
 	"net"
+	"strconv"
+	"strings"
 
 	pb "slimim/prepare/grpc/stream/rpc"
 
@@ -40,31 +42,35 @@ func main() {
 
 func (s *server) SayHello1(request *pb.HelloReq, gs pb.ApiService_SayHello1Server) error {
 	for i := 0; i < 100; i++ {
-		gs.Send(&pb.HelloResp{Data: "Hello1 " + request.Data})
+		gs.Send(&pb.HelloResp{Data: "server1 " + strconv.Itoa(i) + ":" + request.Data})
 	}
+
 	return nil
 }
 
 func (s *server) SayHello2(gs pb.ApiService_SayHello2Server) error {
-	var names []string
+	var list []string
+
 	for {
 		in, err := gs.Recv()
 		if err == io.EOF {
-			gs.SendAndClose(&pb.HelloResp{Data: "io eof"})
+			gs.SendAndClose(&pb.HelloResp{Data: "io eof \r\n" + strings.Join(list, "\r\n")})
 			return nil
 		}
 		if err != nil {
 			log.Fatalf("failed to Recv %v", err)
 			return err
 		}
-		names = append(names, "Hello2 "+in.Data)
+		list = append(list, "server2 "+in.Data)
 	}
+
 	return nil
 }
 
 func (s *server) SayHello3(gs pb.ApiService_SayHello3Server) error {
 	for {
 		in, err := gs.Recv()
+		println(in.Data)
 		if err == io.EOF {
 			return nil
 		}
@@ -72,7 +78,7 @@ func (s *server) SayHello3(gs pb.ApiService_SayHello3Server) error {
 			log.Fatalf("failed to Recv %v", err)
 			return err
 		}
-		gs.Send(&pb.HelloResp{Data: "Hello3 " + in.Data})
+		gs.Send(&pb.HelloResp{Data: "server3 " + in.Data})
 	}
 	return nil
 }
