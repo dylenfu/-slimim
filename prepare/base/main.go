@@ -27,6 +27,11 @@ func dLoop() {
 	for i := 0; i < 10; i++ {
 		println("line " + strconv.Itoa(i))
 	}
+
+	t := []int{1, 2, 3}
+	for k, i := range t {
+		println(k, i)
+	}
 }
 
 func dPackage() {
