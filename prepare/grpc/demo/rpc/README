@@ -1,2 +1,0 @@
-# use protoc to get .pb.go file as follow example
-protoc -I rpc/ rpc/api.proto --go_out=plugins=grpc:rpc
